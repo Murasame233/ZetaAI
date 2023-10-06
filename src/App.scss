@@ -1,0 +1,17 @@
+#header{
+  min-height: 3em;
+}
+
+body{
+  height: 100vh;
+}
+
+div#root{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+div#main{
+  height: 100%;
+}
