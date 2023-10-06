@@ -1,6 +1,4 @@
 import { ChatCompletionCreateParams } from "openai/resources/chat/index.mjs";
-import { Buffer } from "buffer";
-
 
 
 export const functions: ChatCompletionCreateParams.Function[] = [
@@ -53,23 +51,14 @@ interface Make_BTC_Zeta_TransferParam {
     amountSats: number
 }
 
-function hex2a(hex:string) 
-{
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2)
-        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    return str;
-}     
-
 function Make_BTC_Zeta_Transfer(param: Make_BTC_Zeta_TransferParam, sender: string) {
     let hex = param.recipient.substring(2);
-    let converted = hex2a(hex);
     let p = [{
         feeRate: 5,
         from: sender,
         recipient: "tb1qy9pqmk2pd9sv63g27jt8r657wy0d9ueeh0nqur",
         amount: { amount: param.amountSats, decimals: 8 },
-        memo: converted
+        memo: "hex::" + hex
     }]
     console.log(p)
     window.xfi["bitcoin"].request(
